@@ -1,0 +1,24 @@
+{
+  "name": "color-mode",
+  "version": "0.1.0",
+  "description": "Add color theme feature to your page with color-mode!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leegeunhyeok/color-mode.git"
+  },
+  "keywords": [
+    "themes",
+    "color",
+    "darkmode"
+  ],
+  "author": "Geunhyeok LEE <dev.ghlee@gmail.com> (https://github.com/leegeunhyeok)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leegeunhyeok/color-mode/issues"
+  },
+  "homepage": "https://github.com/leegeunhyeok/color-mode#readme"
+}
