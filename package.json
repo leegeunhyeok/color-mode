@@ -2,9 +2,15 @@
   "name": "color-mode",
   "version": "0.1.0",
   "description": "Add color theme feature to your page with color-mode!",
-  "main": "index.js",
+  "main": "dist/color-mode.umd.js",
+  "module": "dist/color-mode.esm.js",
+  "unpkg": "dist/color-mode.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard src/*.js",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/color-mode.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/color-mode.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/color-mode.min.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/leegeunhyeok/color-mode/issues"
   },
-  "homepage": "https://github.com/leegeunhyeok/color-mode#readme"
+  "homepage": "https://github.com/leegeunhyeok/color-mode#readme",
+  "devDependencies": {
+    "rollup": "^1.21.4",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "standard": "^14.3.1"
+  }
 }
