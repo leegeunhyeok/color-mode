@@ -25,9 +25,36 @@ SOFTWARE.
 // @license MIT
 
 class ColorMode {
-  constructor () {
-    // Empty
-    console.log('ColorMode')
+  constructor (option) {
+    if (!this._themes.default) {
+      throw new Error('Default theme is required')
+    }
+
+    this._ROOT_ATTRIBUTE = 'colormode'
+    this._DATA_ATTRIBUTE = 'data-color'
+    this._themes = option.themes
+    this._animation = option['animation'] || 500
+  }
+
+  get themes () {
+    return this._themes
+  }
+
+  getThemeList () {
+    return Object.keys(this._themes)
+  }
+
+  getColorPalette (themeName) {
+    return this._themes[themeName]
+  }
+
+  apply (themeName) {
+    if (!this._themes[themeName]) {
+      console.error(`'${themeName}' theme is not exist`)
+      themeName = 'defualt'
+    }
+
+    // TODO: Apply color theme
   }
 }
 
