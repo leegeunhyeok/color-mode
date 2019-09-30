@@ -4,6 +4,4 @@ if (window) {
   window.ColorMode = ColorMode
 }
 
-export default {
-  ColorMode
-}
+export default ColorMode
