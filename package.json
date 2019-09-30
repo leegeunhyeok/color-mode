@@ -1,7 +1,7 @@
 {
   "name": "color-mode",
   "version": "0.1.0",
-  "description": "Add color theme feature to your page with color-mode!",
+  "description": "Add color theme systme to your page with color-mode!",
   "main": "dist/color-mode.umd.js",
   "module": "dist/color-mode.esm.js",
   "unpkg": "dist/color-mode.min.js",
