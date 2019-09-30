@@ -31,7 +31,7 @@ class ColorMode {
     this._theme = option.initTheme || 'default'
     this._themes = option.themes
     this._fallbackTheme = option.fallbackTheme || 'default'
-    this._duration = option.duration || 0
+    this._duration = option.animation || 0
 
     if (!this._themes.default) {
       throw new Error('Default theme is required')
@@ -57,7 +57,13 @@ class ColorMode {
     styleAttribute.value = 'text/css'
     style.attributes.setNamedItem(styleAttribute)
 
-    const duration = this._duration / 1000
+    let duration = this._duration / 1000
+    if (duration <= 0) {
+      duration = 'none'
+    } else {
+      duration += 's'
+    }
+
     style.innerHTML = `[${this._DATA_ATTRIBUTE}] {
       -webkit-transition: ${duration};
       -moz-transition: ${duration};
