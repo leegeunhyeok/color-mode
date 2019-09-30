@@ -21,8 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-// @author Geunhyeok LEE
 // @license MIT
+// @version 0.1.0
+// @author Geunhyeok LEE
 
 class ColorMode {
   constructor (option) {
@@ -37,8 +38,9 @@ class ColorMode {
       throw new Error('Default theme is required')
     }
 
-    if (!option.themes[option.initTheme || 'default']) {
-      throw new Error(`${option.initTheme} theme is not exist`)
+    if (option.initTheme && !option.themes[option.initTheme]) {
+      console.error(`${option.initTheme} theme is not exist`)
+      this._theme = 'default'
     }
 
     this._init()
