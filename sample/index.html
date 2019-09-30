@@ -3,13 +3,186 @@
   <head>
     <meta charset="utf-8">
     <title>color-mode</title>
+    <style>
+
+      * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+    
+      html, body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .wrap {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+      }
+
+      .header {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .title {
+        margin: 0;
+        margin-bottom: 20px;
+      }
+
+      .text-input {
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        width: 100%;
+      }
+
+      .content {
+        padding-top: 20px;
+      }
+
+      .item {
+        width: 50%;
+        padding: 20px;
+        padding-top: 0;
+        float: left;
+      }
+
+      .panel {
+        border-radius: 5px;
+        padding: 20px;
+      }
+
+      .panel .primary-title {
+        margin: 0;
+      }
+
+      .panel .secondary-title {
+        margin-top: 5px;
+        margin-bottom: 15px;
+      }
+
+      @media screen and (max-width: 1280px) {
+        .item {
+          width: 100%;
+        }
+      }
+
+      .button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+    
+    </style>
   </head>
   <body>
+    <div class="wrap" color-type="bgPrimary">
+      <div class="header" color-type="bgSecondary">
+        <h1 class="title" color-type="tintText">ColorMode</h1>
+        <div>
+          <input class="text-input" color-type="bgTertiary">
+        </div>
+      </div>
+      <div class="content">
+        <div class="item">
+          <div class="panel" color-type="bgSecondary">
+            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
+            <button class="button" color-type="tint" onclick="change()">Change theme</button>
+          </div>
+        </div>
+        <div class="item">
+          <div class="panel" color-type="bgSecondary">
+            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
+            <p color-type="labelSecondary">Content</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="panel" color-type="bgSecondary">
+            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
+            <p color-type="labelSecondary">Content</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="panel" color-type="bgSecondary">
+            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
+            <p color-type="labelSecondary">Content</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- TODO: Sample code -->
     <script src="../dist/color-mode.min.js"></script>
     <script>
 
+      var option = {
+        initTheme: 'as',
+        fallbackTheme: 'default',
+        animation: 500,
+        themes: {
+          default: { // required!
+            tint: '#007aff',
+            tint10: '#d8e7f9',
+            bgPrimary: '#e5e9f2',
+            bgSecondary: '#ffffff',
+            bgTertiary: '#eef3fc',
+            tintText: {
+              color: '#007aff'
+            },
+            labelPrimary: {
+              color: '#1d212b'
+            },
+            labelSecondary: {
+              color: '#45566f'
+            },
+            labelTertiary: {
+              color: '#6a738f'
+            }
+          },
+          dark: {
+            tint: '#6db3ff',
+            tint10: '#e4ecf9',
+            bgPrimary: '#262b3a',
+            bgSecondary: '#484d5d',
+            bgTertiary: '#353a4b',
+            tintText: {
+              color: '#6db3ff'
+            },
+            labelPrimary: {
+              color: '#ffffff'
+            },
+            labelSecondary: {
+              color: '#cfd3e0'
+            },
+            labelTertiary: {
+              color: '#9da7bc'
+            }
+          },
+          // More custom themes
+        }
+      }
+
       var colorMode = new ColorMode(option)
+      
+      function change () {
+        if (colorMode.currentTheme === 'default') {
+          colorMode.set('dark')
+        } else {
+          colorMode.set('default')
+        }
+      }
 
     </script>
   </body>
