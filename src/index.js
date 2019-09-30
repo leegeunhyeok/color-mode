@@ -26,22 +26,95 @@ SOFTWARE.
 
 class ColorMode {
   constructor (option) {
-    if (!this._themes.default) {
-      throw new Error('Default theme is required')
-    }
-
     this._ROOT_ATTRIBUTE = 'colormode'
     this._DATA_ATTRIBUTE = 'data-color'
     this._theme = option.initTheme || 'default'
     this._themes = option.themes
     this._fallbackTheme = option.fallbackTheme || 'default'
-    this._animation = option['animation'] || 500
+    this._duration = option.duration || 0
+
+    if (!this._themes.default) {
+      throw new Error('Default theme is required')
+    }
+
+    if (!option.themes[option.initTheme || 'default']) {
+      throw new Error(`${option.initTheme} theme is not exist`)
+    }
+
+    this._init()
+
     document
       .documentElement
       .attributes
       .setNamedItem(
-        this._createThemeAttribute(this._theme || 'default')
+        this._createThemeAttribute(this._theme)
       )
+  }
+
+  _init () {
+    const style = document.createElement('style')
+    const styleAttribute = document.createAttribute('type')
+    styleAttribute.value = 'text/css'
+    style.attributes.setNamedItem(styleAttribute)
+
+    const duration = this._duration / 1000
+    style.innerHTML = `[${this._DATA_ATTRIBUTE}] {
+      -webkit-transition: ${duration}
+      -moz-transition: ${duration}
+      -ms-transition: ${duration}
+      -o-transition: ${duration}
+      transition: ${duration}
+    }`
+
+    Object.keys(this._themes).forEach(themeName => {
+      style.innerHTML += this._generateThemeStyleSheet(themeName)
+    })
+
+    document.head.appendChild(style)
+    window.__COLOR_MODE_INIT__ = true
+  }
+
+  _generateThemeStyleSheet (themeName) {
+    let css = ''
+    const parentSelector = `[${this._ROOT_ATTRIBUTE}="${themeName}"]`
+    const targetTheme = this._themes[themeName]
+
+    function toBarCase (word) {
+      let val = ''
+      const isUpperCase = word => word === word.toUpperCase()
+
+      word.split(/([A-Z])/g).forEach(el => {
+        if (isUpperCase(el)) {
+          val += '-' + el.toLowerCase()
+        } else {
+          val += el
+        }
+      })
+
+      return val
+    }
+
+    Object.keys(targetTheme).forEach(name => {
+      css += `${parentSelector} [${this._DATA_ATTRIBUTE}="${name}"]{`
+      const style = targetTheme[name]
+
+      if (typeof style === 'string') {
+        css += `background-color:${style};`
+      } else if (typeof style === 'object') {
+        Object.keys(style).forEach(k => {
+          css += `${toBarCase(k)}:${style[k]};`
+        })
+      }
+      css += '}'
+    })
+
+    return css
+  }
+
+  _createThemeAttribute (value) {
+    const attr = document.createAttribute(this._ROOT_ATTRIBUTE)
+    attr.value = value
+    return attr
   }
 
   get currentTheme () {
@@ -54,12 +127,6 @@ class ColorMode {
 
   getColorPalette (themeName) {
     return this._themes[themeName]
-  }
-
-  _createThemeAttribute (value) {
-    const attr = document.createAttribute(this._ROOT_ATTRIBUTE)
-    attr.value = value
-    return attr
   }
 
   apply (themeName) {
