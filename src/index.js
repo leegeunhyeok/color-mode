@@ -135,7 +135,7 @@ class ColorMode {
     return this._themes[themeName]
   }
 
-  apply (themeName) {
+  set (themeName) {
     if (!this._themes[themeName]) {
       console.error(`'${themeName}' theme is not exist`)
       themeName = this._fallbackTheme
