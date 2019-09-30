@@ -6,7 +6,7 @@ export default {
   input: 'src/entry.js',
   output: {
     name: 'ColorMode',
-    exports: 'named'
+    exports: 'auto'
   },
   plugins: [
     commonjs(),
@@ -15,11 +15,10 @@ export default {
       include: [/^.+\.min\.js$/, '*esm*'],
       output: {
         comments(_node, comment) {
-          var text = comment.value;
-          var type = comment.type;
-          console.log(type, text)
+          var text = comment.value
+          var type = comment.type
           if (type === 'comment1') {
-            return /@author|@license/i.test(text);
+            return /@author|@license/i.test(text)
           }
         }
       }
