@@ -32,18 +32,19 @@ class ColorMode {
 
     this._ROOT_ATTRIBUTE = 'colormode'
     this._DATA_ATTRIBUTE = 'data-color'
+    this._theme = option.initTheme || 'default'
     this._themes = option.themes
     this._animation = option['animation'] || 500
     document
       .documentElement
       .attributes
       .setNamedItem(
-        this._createThemeAttribute(option.initTheme || 'default')
+        this._createThemeAttribute(this._theme || 'default')
       )
   }
 
-  get themes () {
-    return this._themes
+  get currentTheme () {
+    return this._theme
   }
 
   getThemeList () {
@@ -65,6 +66,7 @@ class ColorMode {
       console.error(`'${themeName}' theme is not exist`)
       themeName = 'defualt'
     }
+    this._theme = themeName
 
     document
       .documentElement
