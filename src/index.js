@@ -34,6 +34,12 @@ class ColorMode {
     this._DATA_ATTRIBUTE = 'data-color'
     this._themes = option.themes
     this._animation = option['animation'] || 500
+    document
+      .documentElement
+      .attributes
+      .setNamedItem(
+        this._createThemeAttribute(option.initTheme || 'default')
+      )
   }
 
   get themes () {
@@ -48,13 +54,24 @@ class ColorMode {
     return this._themes[themeName]
   }
 
+  _createThemeAttribute (value) {
+    const attr = document.createAttribute(this._ROOT_ATTRIBUTE)
+    attr.value = value
+    return attr
+  }
+
   apply (themeName) {
     if (!this._themes[themeName]) {
       console.error(`'${themeName}' theme is not exist`)
       themeName = 'defualt'
     }
 
-    // TODO: Apply color theme
+    document
+      .documentElement
+      .attributes
+      .setNamedItem(
+        this._createThemeAttribute(themeName)
+      )
   }
 }
 
