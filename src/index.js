@@ -27,7 +27,7 @@ SOFTWARE.
 class ColorMode {
   constructor (option) {
     this._ROOT_ATTRIBUTE = 'colormode'
-    this._DATA_ATTRIBUTE = 'data-color'
+    this._DATA_ATTRIBUTE = 'color-type'
     this._theme = option.initTheme || 'default'
     this._themes = option.themes
     this._fallbackTheme = option.fallbackTheme || 'default'

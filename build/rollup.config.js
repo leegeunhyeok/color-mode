@@ -18,7 +18,7 @@ export default {
           var text = comment.value
           var type = comment.type
           if (type === 'comment1') {
-            return /@author|@license/i.test(text)
+            return /@license|@version|@author/i.test(text)
           }
         }
       }
