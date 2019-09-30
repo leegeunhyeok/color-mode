@@ -34,6 +34,7 @@ class ColorMode {
     this._DATA_ATTRIBUTE = 'data-color'
     this._theme = option.initTheme || 'default'
     this._themes = option.themes
+    this._fallbackTheme = option.fallbackTheme || 'default'
     this._animation = option['animation'] || 500
     document
       .documentElement
@@ -64,7 +65,7 @@ class ColorMode {
   apply (themeName) {
     if (!this._themes[themeName]) {
       console.error(`'${themeName}' theme is not exist`)
-      themeName = 'default'
+      themeName = this._fallbackTheme
     }
     this._theme = themeName
 
