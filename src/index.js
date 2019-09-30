@@ -59,12 +59,12 @@ class ColorMode {
 
     const duration = this._duration / 1000
     style.innerHTML = `[${this._DATA_ATTRIBUTE}] {
-      -webkit-transition: ${duration}
-      -moz-transition: ${duration}
-      -ms-transition: ${duration}
-      -o-transition: ${duration}
-      transition: ${duration}
-    }`
+      -webkit-transition: ${duration};
+      -moz-transition: ${duration};
+      -ms-transition: ${duration};
+      -o-transition: ${duration};
+      transition: ${duration};
+    }`.replace(/\s|\n/g, '')
 
     Object.keys(this._themes).forEach(themeName => {
       style.innerHTML += this._generateThemeStyleSheet(themeName)
