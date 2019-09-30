@@ -64,7 +64,7 @@ class ColorMode {
   apply (themeName) {
     if (!this._themes[themeName]) {
       console.error(`'${themeName}' theme is not exist`)
-      themeName = 'defualt'
+      themeName = 'default'
     }
     this._theme = themeName
 
