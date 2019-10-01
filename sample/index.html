@@ -78,47 +78,48 @@
         cursor: pointer;
         border: none;
         outline: none;
-        padding: 4px 8px;
+        padding: 8px 12px;
         border-radius: 4px;
       }
     
     </style>
   </head>
   <body>
-    <div class="wrap" color-type="bgPrimary">
-      <div class="header" color-type="bgSecondary">
-        <h1 class="title" color-type="tintText">ColorMode</h1>
+    <div class="wrap" color-bg="bgPrimary">
+      <div class="header" color-bg="bgSecondary">
+        <h1 class="title" color-fg="tint">ColorMode</h1>
         <div>
-          <input class="text-input" color-type="bgTertiary">
+          <input class="text-input" color-bg="bgTertiary" color-fg="labelPrimary">
         </div>
       </div>
       <div class="content">
         <div class="item">
-          <div class="panel" color-type="bgSecondary">
-            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
-            <button class="button" color-type="tint" onclick="change()">Change theme</button>
+          <div class="panel" color-bg="bgSecondary">
+            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
+            <button class="button change-theme" color-bg="bgTertiary" color-fg="tint">Change theme</button>
+            <button class="button change-theme" color-bg="tint" color-fg="onTint">Change theme</button>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-type="bgSecondary">
-            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
-            <p color-type="labelSecondary">Content</p>
+          <div class="panel" color-bg="bgSecondary">
+            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
+            <p color-fg="labelSecondary">Content</p>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-type="bgSecondary">
-            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
-            <p color-type="labelSecondary">Content</p>
+          <div class="panel" color-bg="bgSecondary">
+            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
+            <p color-fg="labelSecondary">Content</p>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-type="bgSecondary">
-            <h2 class="primary-title" color-type="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-type="labelTertiary">2019-09-30</h5>
-            <p color-type="labelSecondary">Content</p>
+          <div class="panel" color-bg="bgSecondary">
+            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
+            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
+            <p color-fg="labelSecondary">Content</p>
           </div>
         </div>
       </div>
@@ -128,60 +129,50 @@
     <script>
 
       var option = {
-        initTheme: 'as',
-        fallbackTheme: 'default',
-        animation: 500,
+        // initialTheme: 'dark',
+        // fallbackTheme: 'default',
+        // animation: 300,
         themes: {
           default: { // required!
             tint: '#007aff',
             tint10: '#d8e7f9',
+            onTint: '#fff',
             bgPrimary: '#e5e9f2',
             bgSecondary: '#ffffff',
             bgTertiary: '#eef3fc',
-            tintText: {
-              color: '#007aff'
-            },
-            labelPrimary: {
-              color: '#1d212b'
-            },
-            labelSecondary: {
-              color: '#45566f'
-            },
-            labelTertiary: {
-              color: '#6a738f'
-            }
+            labelPrimary: '#1d212b',
+            labelSecondary: '#45566f',
+            labelTertiary: '#6a738f'
           },
           dark: {
             tint: '#6db3ff',
             tint10: '#e4ecf9',
+            onTint: '#fff',
             bgPrimary: '#262b3a',
             bgSecondary: '#484d5d',
             bgTertiary: '#353a4b',
-            tintText: {
-              color: '#6db3ff'
-            },
-            labelPrimary: {
-              color: '#ffffff'
-            },
-            labelSecondary: {
-              color: '#cfd3e0'
-            },
-            labelTertiary: {
-              color: '#9da7bc'
-            }
+            tintText: '#6db3ff',
+            labelPrimary: '#ffffff',
+            labelSecondary: '#cfd3e0',
+            labelTertiary: '#9da7bc'
           },
           // More custom themes
         }
       }
 
       var colorMode = new ColorMode(option)
-      
+
       function change () {
         if (colorMode.currentTheme === 'default') {
           colorMode.set('dark')
         } else {
           colorMode.set('default')
         }
+      }
+
+      var buttons = document.getElementsByClassName('change-theme')
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', change)
       }
 
     </script>
