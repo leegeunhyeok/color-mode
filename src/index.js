@@ -28,8 +28,13 @@ SOFTWARE.
 class ColorMode {
   constructor (option) {
     this._ROOT_ATTRIBUTE = 'colormode'
-    this._DATA_ATTRIBUTE = 'color-type'
-    this._theme = option.initTheme || 'default'
+    this._DOM_PREFIX = 'color-'
+    this._DOM_ATTRIBUTES = [
+      { 'fg': ['color'] },
+      { 'bg': ['background-color'] },
+      { 'custom': null }
+    ]
+    this._theme = option.initialTheme || 'default'
     this._themes = option.themes
     this._fallbackTheme = option.fallbackTheme || 'default'
     this._duration = option.animation || 0
@@ -38,8 +43,8 @@ class ColorMode {
       throw new Error('Default theme is required')
     }
 
-    if (option.initTheme && !option.themes[option.initTheme]) {
-      console.error(`${option.initTheme} theme is not exist`)
+    if (option.initialTheme && !option.themes[option.initialTheme]) {
+      console.error(`${option.initialTheme} theme is not exist`)
       this._theme = 'default'
     }
 
