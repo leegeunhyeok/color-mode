@@ -127,7 +127,9 @@ class ColorMode {
             css += `${attr.style}:${value};}`
           }
         } else {
-          if (typeof value === 'object') {
+          if (typeof value === 'function') {
+            // TODO: Function type
+          } else if (typeof value === 'object') {
             css += `${parentSelector} [${this._DOM_PREFIX}${attr.name}="${name}"]{`
             Object.keys(value).forEach(k => {
               css += `${toBarCase(k)}:${value[k]};`
