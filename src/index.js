@@ -30,9 +30,18 @@ class ColorMode {
     this._ROOT_ATTRIBUTE = 'colormode'
     this._DOM_PREFIX = 'color-'
     this._DOM_ATTRIBUTES = [
-      { 'fg': ['color'] },
-      { 'bg': ['background-color'] },
-      { 'custom': null }
+      {
+        name: 'fg',
+        style: ['color']
+      },
+      {
+        name: 'bg',
+        style: ['background-color']
+      },
+      {
+        name: 'custom',
+        style: null
+      }
     ]
     this._theme = option.initialTheme || 'default'
     this._themes = option.themes
@@ -71,13 +80,15 @@ class ColorMode {
       duration += 's'
     }
 
-    style.innerHTML = `[${this._DATA_ATTRIBUTE}] {
-      -webkit-transition: ${duration};
-      -moz-transition: ${duration};
-      -ms-transition: ${duration};
-      -o-transition: ${duration};
-      transition: ${duration};
-    }`.replace(/\s|\n/g, '')
+    this._DOM_ATTRIBUTES.forEach(attr => {
+      style.innerHTML += `[${this._DOM_PREFIX}${attr.name}] {
+        -webkit-transition: ${duration};
+        -moz-transition: ${duration};
+        -ms-transition: ${duration};
+        -o-transition: ${duration};
+        transition: ${duration};
+      }`.replace(/\s|\n/g, '')
+    })
 
     Object.keys(this._themes).forEach(themeName => {
       style.innerHTML += this._generateThemeStyleSheet(themeName)
@@ -108,17 +119,23 @@ class ColorMode {
     }
 
     Object.keys(targetTheme).forEach(name => {
-      css += `${parentSelector} [${this._DATA_ATTRIBUTE}="${name}"]{`
-      const style = targetTheme[name]
-
-      if (typeof style === 'string') {
-        css += `background-color:${style};`
-      } else if (typeof style === 'object') {
-        Object.keys(style).forEach(k => {
-          css += `${toBarCase(k)}:${style[k]};`
-        })
-      }
-      css += '}'
+      this._DOM_ATTRIBUTES.forEach(attr => {
+        const value = targetTheme[name]
+        if (attr.style) {
+          if (typeof value === 'string' && attr.style) {
+            css += `${parentSelector} [${this._DOM_PREFIX}${attr.name}="${name}"]{`
+            css += `${attr.style}:${value};}`
+          }
+        } else {
+          if (typeof value === 'object') {
+            css += `${parentSelector} [${this._DOM_PREFIX}${attr.name}="${name}"]{`
+            Object.keys(value).forEach(k => {
+              css += `${toBarCase(k)}:${value[k]};`
+            })
+            css += '}'
+          }
+        }
+      })
     })
 
     return css
