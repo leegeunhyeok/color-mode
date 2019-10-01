@@ -31,30 +31,21 @@ class ColorMode {
       throw new Error('ColorMode instance is already created')
     }
 
-    this._ROOT_ATTRIBUTE = 'colormode'
-    this._DOM_PREFIX = 'color-'
-    this._DOM_ATTRIBUTES = [
-      {
-        name: 'fg',
-        style: ['color']
-      },
-      {
-        name: 'bg',
-        style: ['background-color']
-      },
-      {
-        name: 'custom',
-        style: null
-      }
-    ]
+    if (!option.tags) {
+      throw new Error('option.tags is required')
+    }
+
+    if (!option.themes.default) {
+      throw new Error('Default theme is required')
+    }
+
+    this._ROOT_ATTRIBUTE = 'theme'
+    this._DATA_PREFIX = 'color'
+    this._TAGS = option.tags
     this._theme = option.initialTheme || 'default'
     this._themes = option.themes
     this._fallbackTheme = option.fallbackTheme || 'default'
     this._duration = option.animation || 0
-
-    if (!this._themes.default) {
-      throw new Error('Default theme is required')
-    }
 
     if (option.initialTheme && !option.themes[option.initialTheme]) {
       console.error(`${option.initialTheme} theme is not exist`)
@@ -77,28 +68,16 @@ class ColorMode {
     styleAttribute.value = 'text/css'
     style.attributes.setNamedItem(styleAttribute)
 
-    let duration = this._duration / 1000
+    const duration = this._duration / 1000
     if (duration > 0) {
-      this._DOM_ATTRIBUTES.forEach(attr => {
-        style.innerHTML += `[${this._DOM_PREFIX}${attr.name}] {
-          -webkit-transition: ${duration}s;
-          -moz-transition: ${duration}s;
-          -ms-transition: ${duration}s;
-          -o-transition: ${duration}s;
-          transition: ${duration}s;
-        }`.replace(/\s|\n/g, '')
-      })
-    }
-
-    this._DOM_ATTRIBUTES.forEach(attr => {
-      style.innerHTML += `[${this._DOM_PREFIX}${attr.name}] {
-        -webkit-transition: ${duration};
-        -moz-transition: ${duration};
-        -ms-transition: ${duration};
-        -o-transition: ${duration};
-        transition: ${duration};
+      style.innerHTML += `[data-${this._DATA_PREFIX}] {
+        -webkit-transition: ${duration}s;
+        -moz-transition: ${duration}s;
+        -ms-transition: ${duration}s;
+        -o-transition: ${duration}s;
+        transition: ${duration}s;
       }`.replace(/\s|\n/g, '')
-    })
+    }
 
     Object.keys(this._themes).forEach(themeName => {
       style.innerHTML += this._generateThemeStyleSheet(themeName)
@@ -128,24 +107,38 @@ class ColorMode {
       return val
     }
 
-    Object.keys(targetTheme).forEach(name => {
-      this._DOM_ATTRIBUTES.forEach(attr => {
-        const value = targetTheme[name]
-        if (attr.style) {
-          if (typeof value === 'string' && attr.style) {
-            css += `${parentSelector} [${this._DOM_PREFIX}${attr.name}="${name}"]{`
-            css += `${attr.style}:${value};}`
+    const detailStyleGeneratedStatus = {}
+
+    Object.keys(this._TAGS).forEach(tag => {
+      Object.keys(targetTheme).forEach(color => {
+        const value = this._TAGS[tag]
+
+        if (typeof value === 'string') {
+          css += `${parentSelector} [data-${this._DATA_PREFIX}="${tag}:${color}"]{`
+          css += `${value}:${targetTheme[color]};}`
+        } else if (typeof value === 'object') {
+          if (detailStyleGeneratedStatus[tag]) {
+            return
           }
+
+          detailStyleGeneratedStatus[tag] = true
+          css += `${parentSelector} [data-${this._DATA_PREFIX}="${tag}"]{`
+          Object.keys(value).forEach(k => {
+            let color = k
+            if (value[k].charAt(0) === '@') {
+              color = targetTheme[value[k].slice(1)]
+
+              if (!color) {
+                throw new Error(
+                  `Color name '${k.slice(1)}' not found in '${themeName}' theme`
+                )
+              }
+            }
+            css += `${toBarCase(k)}:${color};`
+          })
+          css += '}'
         } else {
-          if (typeof value === 'function') {
-            // TODO: Function type
-          } else if (typeof value === 'object') {
-            css += `${parentSelector} [${this._DOM_PREFIX}${attr.name}="${name}"]{`
-            Object.keys(value).forEach(k => {
-              css += `${toBarCase(k)}:${value[k]};`
-            })
-            css += '}'
-          }
+          // TODO: Throw type error
         }
       })
     })
