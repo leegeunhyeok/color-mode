@@ -78,10 +78,16 @@ class ColorMode {
     style.attributes.setNamedItem(styleAttribute)
 
     let duration = this._duration / 1000
-    if (duration <= 0) {
-      duration = 'none'
-    } else {
-      duration += 's'
+    if (duration > 0) {
+      this._DOM_ATTRIBUTES.forEach(attr => {
+        style.innerHTML += `[${this._DOM_PREFIX}${attr.name}] {
+          -webkit-transition: ${duration}s;
+          -moz-transition: ${duration}s;
+          -ms-transition: ${duration}s;
+          -o-transition: ${duration}s;
+          transition: ${duration}s;
+        }`.replace(/\s|\n/g, '')
+      })
     }
 
     this._DOM_ATTRIBUTES.forEach(attr => {
