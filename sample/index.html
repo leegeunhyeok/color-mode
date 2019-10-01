@@ -48,10 +48,11 @@
       }
 
       .item {
-        width: 50%;
+        margin: auto;
+        width: 100%;
+        max-width: 800px;
         padding: 20px;
         padding-top: 0;
-        float: left;
       }
 
       .panel {
@@ -66,12 +67,7 @@
       .panel .secondary-title {
         margin-top: 5px;
         margin-bottom: 15px;
-      }
-
-      @media screen and (max-width: 1280px) {
-        .item {
-          width: 100%;
-        }
+        font-weight: normal;
       }
 
       .button {
@@ -81,45 +77,82 @@
         padding: 8px 12px;
         border-radius: 4px;
       }
+
+      .code {
+        padding: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .code div {
+        width: 100%;
+        float: left;
+      }
+
+      .code span {
+        font-family: 'Consolas';
+        float: left;
+      }
     
     </style>
   </head>
   <body>
-    <div class="wrap" color-bg="bgPrimary">
-      <div class="header" color-bg="bgSecondary">
-        <h1 class="title" color-fg="tint">ColorMode</h1>
+    <div class="wrap" data-color="bg:bgPrimary">
+      <div class="header" data-color="bg:bgSecondary">
+        <h1 class="title" data-color="fg:tint">ColorMode</h1>
         <div>
-          <input class="text-input" color-bg="bgTertiary" color-fg="labelPrimary">
+          <input class="text-input" data-color="bg:bgTertiary" data-color="fg:labelPrimary">
         </div>
       </div>
       <div class="content">
         <div class="item">
-          <div class="panel" color-bg="bgSecondary">
-            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
-            <button class="button change-theme" color-bg="bgTertiary" color-fg="tint">Change theme</button>
-            <button class="button change-theme" color-bg="tint" color-fg="onTint">Change theme</button>
+          <div class="panel" data-color="bg:bgSecondary">
+            <h2 class="primary-title" data-color="fg:labelPrimary">Demo</h2>
+            <h5 class="secondary-title" data-color="fg:labelTertiary">1. color-mode demo</h5>
+            <button class="button change-theme" data-color="primaryBtn">Change theme</button>
+            <button class="button change-theme" data-color="secondaryBtn">Change theme</button>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-bg="bgSecondary">
-            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
-            <p color-fg="labelSecondary">Content</p>
+          <div class="panel" data-color="bg:bgSecondary">
+            <h2 class="primary-title" data-color="fg:labelPrimary">Usage</h2>
+            <h5 class="secondary-title" data-color="fg:labelTertiary">Create instance</h5>
+            <div class="code" data-color="bg:codeBg">
+              <div>
+                <span data-color="fg:codeKeyword">var</span>
+                <span>&nbsp;</span>
+                <span data-color="fg:codeVariable">colorMode</span>
+                <span data-color="fg:codeSymbol">&nbsp;=&nbsp;</span>
+                <span data-color="fg:codeKeyword">new</span>
+                <span>&nbsp;</span>
+                <span data-color="fg:codeClass">ColorMode</span>
+                <span data-color="fg:codeSymbol">(</span>
+                <span data-color="fg:codeVariable">option</span>
+                <span data-color="fg:codeSymbol">)</span>
+              </div>
+              <div>
+                <span data-color="fg:codeVariable">colorMode</span>
+                <span data-color="fg:codeSymbol">.</span>
+                <span data-color="fg:codeFunction">set</span>
+                <span data-color="fg:codeSymbol">(</span>
+                <span data-color="fg:codeVariable">themeName</span>
+                <span data-color="fg:codeSymbol">)</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-bg="bgSecondary">
-            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
-            <p color-fg="labelSecondary">Content</p>
+          <div class="panel" data-color="bg:bgSecondary">
+            <h2 class="primary-title" data-color="fg:labelPrimary">Item</h2>
+            <h5 class="secondary-title" data-color="fg:labelTertiary">2019-09-30</h5>
+            <p data-color="fg:labelSecondary">Content</p>
           </div>
         </div>
         <div class="item">
-          <div class="panel" color-bg="bgSecondary">
-            <h2 class="primary-title" color-fg="labelPrimary">Item</h2>
-            <h5 class="secondary-title" color-fg="labelTertiary">2019-09-30</h5>
-            <p color-fg="labelSecondary">Content</p>
+          <div class="panel" data-color="bg:bgSecondary">
+            <h2 class="primary-title" data-color="fg:labelPrimary">Item</h2>
+            <h5 class="secondary-title" data-color="fg:labelTertiary">2019-09-30</h5>
+            <p data-color="fg:labelSecondary">Content</p>
           </div>
         </div>
       </div>
@@ -130,7 +163,19 @@
       var option = {
         initialTheme: 'dark',
         fallbackTheme: 'default',
-        animation: 300,
+        animation: 200,
+        tags: {
+          fg: 'color',
+          bg: 'background-color',
+          primaryBtn: {
+            backgroundColor: '@tint',
+            color: '@onTint'
+          },
+          secondaryBtn: {
+            backgroundColor: '@bgTertiary',
+            color: '@tint'
+          }
+        },
         themes: {
           default: { // required!
             tint: '#007aff',
@@ -141,7 +186,15 @@
             bgTertiary: '#eef3fc',
             labelPrimary: '#1d212b',
             labelSecondary: '#45566f',
-            labelTertiary: '#6a738f'
+            labelTertiary: '#6a738f',
+            // Code theme
+            codeBg: '#f1f1f1',
+            codeSymbol: '#000000',
+            codeKeyword: '#0000ff',
+            codeVariable: '#00139a',
+            codeClass: '#30a1c2',
+            codeFunction: '#a07c32',
+            codeComment: '#6a9955'
           },
           dark: {
             tint: '#6db3ff',
@@ -153,7 +206,15 @@
             tintText: '#6db3ff',
             labelPrimary: '#ffffff',
             labelSecondary: '#cfd3e0',
-            labelTertiary: '#9da7bc'
+            labelTertiary: '#9da7bc',
+            // Code theme
+            codeBg: '#1e1e1e',
+            codeSymbol: '#d4d4d4',
+            codeKeyword: '#569cd6',
+            codeVariable: '#9cdcfe',
+            codeClass: '#4ec9b0',
+            codeFunction: '#dcdcaa',
+            codeComment: '#008000'
           },
           // More custom themes
         }
