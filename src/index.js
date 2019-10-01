@@ -27,6 +27,10 @@ SOFTWARE.
 
 class ColorMode {
   constructor (option) {
+    if (window.__COLOR_MODE_INIT__) {
+      throw new Error('ColorMode instance is already created')
+    }
+
     this._ROOT_ATTRIBUTE = 'colormode'
     this._DOM_PREFIX = 'color-'
     this._DOM_ATTRIBUTES = [
