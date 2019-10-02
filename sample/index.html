@@ -2,14 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>color-mode</title>
+    <title>ColorMode</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
     <style>
 
       * {
+        font-family: 'Comfortaa', cursive;
         box-sizing: border-box;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
+        text-rendering: optimizeLegibility;    
       }
     
       html, body {
@@ -70,6 +72,11 @@
         font-weight: normal;
       }
 
+      select {
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+
       .button {
         cursor: pointer;
         border: none;
@@ -97,68 +104,96 @@
     </style>
   </head>
   <body>
-    <div class="wrap" data-color="bg:bgPrimary">
-      <div class="header" data-color="bg:bgSecondary">
-        <h1 class="title" data-color="fg:tint">ColorMode</h1>
+    <div class="wrap" data-theme="bg:bgPrimary">
+      <div class="header" data-theme="bg:bgSecondary">
+        <h1 class="title" data-theme="fg:tint">ColorMode</h1>
         <div>
-          <input class="text-input" data-color="bg:bgTertiary" data-color="fg:labelPrimary">
+          <input class="text-input" data-theme="inputField">
         </div>
       </div>
       <div class="content">
         <div class="item">
-          <div class="panel" data-color="bg:bgSecondary">
-            <h2 class="primary-title" data-color="fg:labelPrimary">Demo</h2>
-            <h5 class="secondary-title" data-color="fg:labelTertiary">1. color-mode demo</h5>
-            <button class="button change-theme" data-color="primaryBtn">Change theme</button>
-            <button class="button change-theme" data-color="secondaryBtn">Change theme</button>
+          <div class="panel" data-theme="bg:bgSecondary">
+            <h2 class="primary-title" data-theme="fg:labelPrimary">Demo</h2>
+            <h5 class="secondary-title" data-theme="fg:labelTertiary">ColorMode DEMO</h5>
+            <div>
+              <select id="theme_list" data-theme="select">
+                <!-- Theme options -->
+              </select>
+            </div>
           </div>
         </div>
         <div class="item">
-          <div class="panel" data-color="bg:bgSecondary">
-            <h2 class="primary-title" data-color="fg:labelPrimary">Usage</h2>
-            <h5 class="secondary-title" data-color="fg:labelTertiary">Create instance</h5>
-            <div class="code" data-color="bg:codeBg">
+          <div class="panel" data-theme="bg:bgSecondary">
+            <h2 class="primary-title" data-theme="fg:labelPrimary">Download</h2>
+            <h5 class="secondary-title" data-theme="fg:labelTertiary">-</h5>
+            <a class="button" data-theme="secondaryBtn">Github</a>
+            <a class="button" data-theme="primaryBtn">NPM</a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="panel" data-theme="bg:bgSecondary">
+            <h2 class="primary-title" data-theme="fg:labelPrimary">Usage</h2>
+            <h5 class="secondary-title" data-theme="fg:labelTertiary">Create instance</h5>
+            <div class="code" data-theme="code">
               <div>
-                <span data-color="fg:codeKeyword">var</span>
+                <span data-theme="fg:codeKeyword">var</span>
                 <span>&nbsp;</span>
-                <span data-color="fg:codeVariable">colorMode</span>
-                <span data-color="fg:codeSymbol">&nbsp;=&nbsp;</span>
-                <span data-color="fg:codeKeyword">new</span>
+                <span data-theme="fg:codeVariable">colorMode</span>
+                <span data-theme="fg:codeSymbol">&nbsp;=&nbsp;</span>
+                <span data-theme="fg:codeKeyword">new</span>
                 <span>&nbsp;</span>
-                <span data-color="fg:codeClass">ColorMode</span>
-                <span data-color="fg:codeSymbol">(</span>
-                <span data-color="fg:codeVariable">option</span>
-                <span data-color="fg:codeSymbol">)</span>
+                <span data-theme="fg:codeClass">ColorMode</span>
+                <span data-theme="fg:codeSymbol">(</span>
+                <span data-theme="fg:codeVariable">option</span>
+                <span data-theme="fg:codeSymbol">)</span>
               </div>
               <div>
-                <span data-color="fg:codeVariable">colorMode</span>
-                <span data-color="fg:codeSymbol">.</span>
-                <span data-color="fg:codeFunction">set</span>
-                <span data-color="fg:codeSymbol">(</span>
-                <span data-color="fg:codeVariable">themeName</span>
-                <span data-color="fg:codeSymbol">)</span>
+                <span data-theme="fg:codeVariable">colorMode</span>
+                <span data-theme="fg:codeSymbol">.</span>
+                <span data-theme="fg:codeFunction">set</span>
+                <span data-theme="fg:codeSymbol">(</span>
+                <span data-theme="fg:codeVariable">themeName</span>
+                <span data-theme="fg:codeSymbol">)</span>
               </div>
             </div>
           </div>
         </div>
         <div class="item">
-          <div class="panel" data-color="bg:bgSecondary">
-            <h2 class="primary-title" data-color="fg:labelPrimary">Item</h2>
-            <h5 class="secondary-title" data-color="fg:labelTertiary">2019-09-30</h5>
-            <p data-color="fg:labelSecondary">Content</p>
+          <div class="panel" data-theme="bg:bgSecondary">
+            <h2 class="primary-title" data-theme="fg:labelPrimary">Item</h2>
+            <h5 class="secondary-title" data-theme="fg:labelTertiary">2019-09-30</h5>
+            <p data-theme="fg:labelSecondary">Content</p>
           </div>
         </div>
         <div class="item">
-          <div class="panel" data-color="bg:bgSecondary">
-            <h2 class="primary-title" data-color="fg:labelPrimary">Item</h2>
-            <h5 class="secondary-title" data-color="fg:labelTertiary">2019-09-30</h5>
-            <p data-color="fg:labelSecondary">Content</p>
+          <div class="panel" data-theme="bg:bgSecondary">
+            <h2 class="primary-title" data-theme="fg:labelPrimary">Item</h2>
+            <h5 class="secondary-title" data-theme="fg:labelTertiary">2019-09-30</h5>
+            <p data-theme="fg:labelSecondary">Content</p>
           </div>
         </div>
       </div>
     </div>
     <script src="../dist/color-mode.min.js"></script>
     <script>
+
+      window.onload = function () {
+        var select = document.getElementById('theme_list')
+        var list = colorMode.getThemeList()
+
+        for (var i = 0; i < list.length; i++) {
+          var option = document.createElement('option')
+          var name = list[i].charAt(0).toUpperCase() + list[i].slice(1)
+          option.appendChild(document.createTextNode(name))
+          option.selected = list[i].toLowerCase() === colorMode.currentTheme
+          select.appendChild(option)
+        }
+
+        select.addEventListener('change', function () {
+          colorMode.set(this.value.toLowerCase())
+        })
+      }
 
       var option = {
         initialTheme: 'dark',
@@ -167,6 +202,15 @@
         tags: {
           fg: 'color',
           bg: 'background-color',
+          inputField: {
+            backgroundColor: '@bgTertiary',
+            color: '@labelPrimary'
+          },
+          select: {
+            backgroundColor: '@bgTertiary',
+            color: '@labelPrimary',
+            borderColor: '@bgPrimary'
+          },
           primaryBtn: {
             backgroundColor: '@tint',
             color: '@onTint'
@@ -174,13 +218,17 @@
           secondaryBtn: {
             backgroundColor: '@bgTertiary',
             color: '@tint'
+          },
+          code: {
+            backgroundColor: '@codeBg',
+            border: '1px solid @bgPrimary'
           }
         },
         themes: {
           default: { // required!
             tint: '#007aff',
             tint10: '#d8e7f9',
-            onTint: '#fff',
+            onTint: '#ffffff',
             bgPrimary: '#e5e9f2',
             bgSecondary: '#ffffff',
             bgTertiary: '#eef3fc',
@@ -188,18 +236,18 @@
             labelSecondary: '#45566f',
             labelTertiary: '#6a738f',
             // Code theme
-            codeBg: '#f1f1f1',
+            codeBg: '#ffffff',
             codeSymbol: '#000000',
             codeKeyword: '#0000ff',
             codeVariable: '#00139a',
             codeClass: '#30a1c2',
-            codeFunction: '#a07c32',
+            codeFunction: '#be8d42',
             codeComment: '#6a9955'
           },
           dark: {
             tint: '#6db3ff',
             tint10: '#e4ecf9',
-            onTint: '#fff',
+            onTint: '#ffffff',
             bgPrimary: '#262b3a',
             bgSecondary: '#484d5d',
             bgTertiary: '#353a4b',
@@ -216,6 +264,26 @@
             codeFunction: '#dcdcaa',
             codeComment: '#008000'
           },
+          contrast: {
+            tint: '#ffffff',
+            tint10: '#555555',
+            onTint: '#000000',
+            bgPrimary: '#ffffff',
+            bgSecondary: '#000000',
+            bgTertiary: '#333333',
+            tintText: '#333333',
+            labelPrimary: '#ffffff',
+            labelSecondary: '#cfd3e0',
+            labelTertiary: '#9da7bc',
+            // Code theme
+            codeBg: 'white',
+            codeSymbol: 'black',
+            codeKeyword: 'black',
+            codeVariable: 'black',
+            codeClass: 'black',
+            codeFunction: 'black',
+            codeComment: 'black'
+          }
           // More custom themes
         }
       }
