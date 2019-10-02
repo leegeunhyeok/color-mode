@@ -216,7 +216,7 @@ class ColorMode {
    * Return current theme name
    * @returns {string}
    */
-  get currentTheme () {
+  getCurrentTheme () {
     return this._theme
   }
 
@@ -250,4 +250,16 @@ class ColorMode {
   }
 }
 
-export default ColorMode
+export default option => {
+  const colorMode = new ColorMode(option)
+  const exportObject = {
+    getThemeList: colorMode.getThemeList.bind(colorMode),
+    set: colorMode.set.bind(colorMode)
+  }
+
+  return Object.defineProperty(exportObject, 'currentTheme', {
+    get () {
+      return colorMode.getCurrentTheme()
+    }
+  })
+}
