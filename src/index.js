@@ -40,7 +40,7 @@ class ColorMode {
     }
 
     this._ROOT_ATTRIBUTE = 'theme' // <html {_ROOT_ATTRIBUTE}="themeName">
-    this._DATA_PREFIX = 'color' // data-{_DATA_PREFIX}
+    this._DATA_PREFIX = 'theme' // data-{_DATA_PREFIX}
     this._TAGS = option.tags
     this._theme = option.initialTheme || 'default'
     this._themes = option.themes
@@ -99,10 +99,55 @@ class ColorMode {
 
     // [parentSelector] [theme] { style }
     const parentSelector = `[${this._ROOT_ATTRIBUTE}="${themeName}"]`
-    const targetTheme = this._themes[themeName]
+
+    // All tags
+    Object.keys(this._TAGS).forEach(tag => {
+      /**
+       * string: Style attribute name
+       * object: Detail style object
+       */
+      const tagValue = this._TAGS[tag]
+
+      if (typeof tagValue === 'string') { // Style attribute name
+        // target theme's values
+        Object.keys(this._themes[themeName]).forEach(name => {
+          css += this._convertTagToDefaultStyle(parentSelector, tagValue, themeName, tag, name)
+        })
+      } else if (typeof tagValue === 'object') { // detail tag
+        css += this._convertTagToDetailStyle(parentSelector, tagValue, themeName, tag)
+      } else { // Unknown
+        throw new Error(`tag value must be string or object. but given '${typeof value}'`)
+      }
+    })
+
+    return css
+  }
+
+  /**
+   * Tag value to CSS string (default)
+   * @param {string} parentSelector Base selector
+   * @param {string} cssProperty CSS Property
+   * @param {string} themeName Theme name
+   * @param {string} tag Tag name
+   * @param {string} name Theme color name
+   */
+  _convertTagToDefaultStyle (parentSelector, cssProperty, themeName, tag, name) {
+    const css = `${parentSelector} [data-${this._DATA_PREFIX}="${tag}:${name}"]{`
+    return css + `${cssProperty}:${this._themes[themeName][name]};}`
+  }
+
+  /**
+   * Tag value to CSS string (detail)
+   * @param {string} parentSelector Base selector
+   * @param {string} styleObject Detail style object
+   * @param {string} themeName Theme name
+   * @param {string} tag Tag name
+   */
+  _convertTagToDetailStyle (parentSelector, styleObject, themeName, tag) {
+    let css = `${parentSelector} [data-${this._DATA_PREFIX}="${tag}"]{`
 
     /**
-     * Convert camelcase to CSS attribute type (hello-world)
+     * Convert camelcase to CSS attribute type (ex: helloWorld -> hello-world)
      * @param {string} word Camelcase string
      */
     function toBarCase (word) {
@@ -121,70 +166,39 @@ class ColorMode {
       return val
     }
 
-    // Detail style must be initialize once
-    const detailStyleGeneratedStatus = {} // for status check
+    // style object keys
+    Object.keys(styleObject).forEach(k => {
+      // styleObject[k] = (@theme color name || css property value)
+      const processed = []
 
-    // All tags
-    Object.keys(this._TAGS).forEach(tag => {
-      // targetTheme's color
-      Object.keys(targetTheme).forEach(color => {
-        // tag's value
-        // string or object
-        /* Type ->
-          - string: Style attribute name
-          - object: Detail style defined object */
-        const value = this._TAGS[tag]
+      if (typeof styleObject[k] !== 'string') {
+        throw new Error(`detail style value must be string, but given '${typeof styleObject[k]}'`)
+      }
 
-        // Style attribute name
-        if (typeof value === 'string') {
-          css += `${parentSelector} [data-${this._DATA_PREFIX}="${tag}:${color}"]{`
-          css += `${value}:${targetTheme[color]};}`
-        } else if (typeof value === 'object') {
-          // Detail style defined object
+      styleObject[k].split(' ').forEach(splitedValue => {
+        let temp = splitedValue
 
-          // If already initialized => skip
-          if (detailStyleGeneratedStatus[tag]) {
-            return
+        // Start with @ => Theme color name
+        if (splitedValue.charAt(0) === '@') {
+          // Find color
+          temp = this._themes[themeName][splitedValue.slice(1)]
+
+          // value[k] color of theme is not found
+          if (!temp) {
+            throw new Error(
+              `Color name '${splitedValue.slice(1)}' not found in '${themeName}' theme`
+            )
           }
-
-          // Set init status to true
-          detailStyleGeneratedStatus[tag] = true
-
-          css += `${parentSelector} [data-${this._DATA_PREFIX}="${tag}"]{`
-
-          // Key of style defined object
-          Object.keys(value).forEach(k => {
-            // value: style defined object
-            // k: key of style defined object
-            // value[k]: value
-
-            // value[k] will be color scheme string or theme's color name
-            let color = value[k]
-
-            // Start with @ => theme's color
-            if (value[k].charAt(0) === '@') {
-              // Find theme's color
-              color = targetTheme[value[k].slice(1)]
-
-              // value[k] color of theme is not found
-              if (!color) {
-                throw new Error(
-                  `Color name '${k.slice(1)}' not found in '${themeName}' theme`
-                )
-              }
-            }
-
-            // Add attribute with color
-            css += `${toBarCase(k)}:${color};`
-          })
-          css += '}'
-        } else {
-          throw new Error(`tag value must be string or object. but given '${typeof value}'`)
         }
+
+        processed.push(temp)
       })
+
+      // Add attribute with color
+      css += `${toBarCase(k)}:${processed.join(' ')};`
     })
 
-    return css
+    return css + '}'
   }
 
   /**
