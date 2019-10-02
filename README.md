@@ -36,7 +36,15 @@ ColorMode Class
   - You can using theme's color with `@` (ex: `@NAME` find 'NAME' color from theme)
 
 ```javascript
-// Sample
+/**
+ * tags: {
+ *   TAG_NAME: 'CSS Property',
+ *   TAG_NAME: {
+ *      boxShadow: '0 0 0 5px @primary' // Using theme's 'primary' named color
+ *   }
+ * }
+ */
+
 const option = {
   // ...
   tags: {
@@ -63,7 +71,14 @@ const option = {
   - Each theme has style name(s)
 
 ```javascript
-// Sample
+/**
+ * themes: {
+ *   THEME_NAME: {
+ *     STYLE_NAME: 'VALUE'
+ *   }
+ * }
+ */
+
 const option = {
   // ...
   themes: {
@@ -73,7 +88,8 @@ const option = {
       onTint: '#ffffff',
       bgPrimary: '#e5e9f2',
       bgSecondary: '#ffffff',
-      bgTertiary: '#eef3fc'
+      bgTertiary: '#eef3fc',
+      panelBorder: '1px solid #007aff'
     },
     dark: {
       tint: '#6db3ff',
@@ -81,10 +97,53 @@ const option = {
       onTint: '#ffffff',
       bgPrimary: '#262b3a',
       bgSecondary: '#484d5d',
-      bgTertiary: '#353a4b'
+      bgTertiary: '#353a4b',
+      panelBorder: '1px solid #6db3ff'
     },
     myTheme: { ... }
   }
 }
 ```
 
+### (Property) ColorMode.currentTheme
+
+| Type | Description |
+|:--:|:--|
+| string | Current theme name |
+
+```javascript
+if (colorMode.currentTheme === 'default') {
+  // If current theme is default..
+}
+```
+
+### (Method) ColorMode.getThemeList
+
+Return all of theme names list
+
+```javascript
+const colorMode = new ColorMode({
+  //...
+  themes: {
+    default: { /*...*/ },
+    dark: { /*...*/ },
+    rainbow: { /*...*/ }
+  }
+})
+
+colorMode.getThemeList() // ['default', 'dark', 'rainbow']
+```
+
+
+### (Method) ColorMode.set
+
+Change theme to target theme
+
+| Parameter | Type | Required |
+|:--|:--:|:--:|
+| themeName | string | O |
+
+```javascript
+// Set to 'dark' theme
+colorMode.getThemeList('dark')
+```
