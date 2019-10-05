@@ -40,7 +40,7 @@ class ColorMode {
     }
 
     this._ROOT_ATTRIBUTE = 'theme' // <html {_ROOT_ATTRIBUTE}="themeName">
-    this._DATA_PREFIX = 'theme' // data-{_DATA_PREFIX}
+    this._PREFIX = 'colormode' // <tag {_PREFIX}="value"/>
     this._TAGS = option.tags
     this._theme = option.initialTheme || 'default'
     this._themes = option.themes
@@ -72,7 +72,7 @@ class ColorMode {
     // Calculate animation duration
     const duration = this._duration / 1000
     if (duration > 0) {
-      style.innerHTML += `[data-${this._DATA_PREFIX}] {
+      style.innerHTML += `[${this._PREFIX}] {
         -webkit-transition: ${duration}s;
         -moz-transition: ${duration}s;
         -ms-transition: ${duration}s;
@@ -132,7 +132,7 @@ class ColorMode {
    * @param {string} name Theme color name
    */
   _convertTagToDefaultStyle (parentSelector, cssProperty, themeName, tag, name) {
-    const css = `${parentSelector} [data-${this._DATA_PREFIX}="${tag}:${name}"]{`
+    const css = `${parentSelector} [${this._PREFIX}="${tag}:${name}"]{`
     return css + `${cssProperty}:${this._themes[themeName][name]};}`
   }
 
@@ -144,7 +144,7 @@ class ColorMode {
    * @param {string} tag Tag name
    */
   _convertTagToDetailStyle (parentSelector, styleObject, themeName, tag) {
-    let css = `${parentSelector} [data-${this._DATA_PREFIX}="${tag}"]{`
+    let css = `${parentSelector} [${this._PREFIX}="${tag}"]{`
 
     /**
      * Convert camelcase to CSS attribute type (ex: helloWorld -> hello-world)
