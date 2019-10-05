@@ -7,6 +7,17 @@ npm install color-mode
 ```
 
 ## Usage
+
+```html
+<div colormode="bg:priamry">
+  <div colormode="bg:">
+    <a class="button" colormode="secondaryBtn">Github</a>
+    <a class="button" colormode="primaryBtn">NPM</a>
+  </div>
+</div>
+```
+
+## Document
 ### ColorMode
 ColorMode Class
 > ColorMode instance must be create once.
@@ -62,7 +73,7 @@ const option = {
 ##### option.themes
 
 | Key | Value | Type | Required |
-|:--|:--:|:--:|:--:|:--|
+|:--|:--:|:--:|:--:|
 | default | CSS Style (color code, etc..) | string | O |
 | `custom theme name` | CSS Style (color code, etc..) | string | X |
 
@@ -147,3 +158,6 @@ Change theme to target theme
 // Set to 'dark' theme
 colorMode.getThemeList('dark')
 ```
+
+## License
+MIT Licensed
