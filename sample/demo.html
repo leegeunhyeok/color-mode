@@ -67,6 +67,7 @@
     <script src="../dist/color-mode.min.js"></script>
     <script>
 
+      // Bind button event
       window.onload = function () {
         document.getElementById('dark').addEventListener('click', function () {
           colorMode.set('dark')
@@ -78,9 +79,9 @@
       }
       
       var option = {
-        initialTheme: 'dark',
+        initialTheme: 'dark', // Init with dark
         fallbackTheme: 'default',
-        animation: 200,
+        animation: 200, // Transform effect duration(ms)
         tags: {
           fg: 'color',
           bg: 'background-color',
@@ -111,12 +112,13 @@
             bgTertiary: '#353a4b',
             labelPrimary: '#ffffff',
             labelSecondary: '#cfd3e0'
-          }
+          },
+          // You can add more custom themes
         }
       }
 
+      // Create ColorMode instance
       var colorMode = new ColorMode(option)
-      colorMode.set('dark')
     
     </script>
   </body>
