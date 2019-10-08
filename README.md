@@ -38,7 +38,7 @@ ColorMode Class
 ##### option.tags
 
 | Key | Value | Type | Required |
-|:--|:--:|:--:|:--:|:--|
+|:--|:--:|:--:|:--:|
 | `custom tag name` | CSS Property or Style object | string \| object | O |
 
 - (string) CSS Property: `'color'`, `'background-color'`, `'box-shadow'`, ...
