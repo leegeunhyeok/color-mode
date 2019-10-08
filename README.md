@@ -32,8 +32,8 @@ ColorMode Class
 | initialTheme | string | X | `default` | Initial theme name  |
 | fallbackTheme | string | X | `default` | Fallback theme name |
 | animation | number | X | `0` | Theme transform effect duration |
-| tags | [object]() | O | none | Theme tags |
-| themes | [object]() | O | none | Themes |
+| tags | [object](#optiontags) | O | none | Theme tags |
+| themes | [object](#optionthemes) | O | none | Themes |
 
 ##### option.tags
 
