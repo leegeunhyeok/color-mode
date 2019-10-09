@@ -6,6 +6,9 @@
 npm install color-mode
 ```
 
+OR Add to `<script>`  
+[Download](https://github.com/leegeunhyeok/color-mode/releases)
+
 ## Usage
 
 ```html
@@ -77,7 +80,8 @@ npm install color-mode
 
 <img src="./demo.gif">
 
-[DEMO](https://leegeunhyeok.github.io/color-mode/demo)
+- [DEMO](https://leegeunhyeok.github.io/color-mode/demo)
+- [DEMO with Docs](https://leegeunhyeok.github.io/color-mode/docs)
 
 ## Document
 
