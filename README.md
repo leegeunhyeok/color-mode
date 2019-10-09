@@ -234,7 +234,7 @@ Change theme to target theme
 
 ```javascript
 // Set to 'dark' theme
-colorMode.getThemeList('dark')
+colorMode.set('dark')
 ```
 
 ## License
