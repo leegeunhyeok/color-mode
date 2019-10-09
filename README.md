@@ -77,6 +77,8 @@ npm install color-mode
 
 <img src="./demo.gif">
 
+[DEMO](https://leegeunhyeok.github.io/color-mode/demo)
+
 ## Document
 ### ColorMode
 ColorMode Class
