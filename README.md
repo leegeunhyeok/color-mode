@@ -9,12 +9,70 @@ npm install color-mode
 ## Usage
 
 ```html
-<div colormode="bg:priamry">
-  <div colormode="bg:">
-    <a class="button" colormode="secondaryBtn">Github</a>
-    <a class="button" colormode="primaryBtn">NPM</a>
+<div class="wrap" colormode="bg:bgPrimary">
+  <div class="panel" colormode="bg:bgSecondary">
+    <h2 class="title" colormode="fg:labelPrimary">ColorMode</h2>
+    <a id="dark" class="button" colormode="secondaryBtn">Dark</a>
+    <a id="default" class="button" colormode="primaryBtn">Default</a>
   </div>
 </div>
+
+<script>
+
+  // Bind button event
+  window.onload = function () {
+    document.getElementById('dark').addEventListener('click', function () {
+      colorMode.set('dark')
+    })
+
+    document.getElementById('default').addEventListener('click', function () {
+      colorMode.set('default')
+    })
+  }
+
+  var option = {
+    initialTheme: 'dark', // Init with dark
+    fallbackTheme: 'default',
+    animation: 200, // Transform effect duration(ms)
+    tags: {
+      fg: 'color',
+      bg: 'background-color',
+      primaryBtn: {
+        backgroundColor: '@tint',
+        color: '@onTint'
+      },
+      secondaryBtn: {
+        backgroundColor: '@bgTertiary',
+        color: '@tint'
+      }
+    },
+    themes: {
+      default: { // required!
+        tint: '#007aff',
+        onTint: '#ffffff',
+        bgPrimary: '#e5e9f2',
+        bgSecondary: '#ffffff',
+        bgTertiary: '#eef3fc',
+        labelPrimary: '#1d212b',
+        labelSecondary: '#45566f'
+      },
+      dark: {
+        tint: '#6db3ff',
+        onTint: '#ffffff',
+        bgPrimary: '#262b3a',
+        bgSecondary: '#484d5d',
+        bgTertiary: '#353a4b',
+        labelPrimary: '#ffffff',
+        labelSecondary: '#cfd3e0'
+      },
+      // You can add more custom themes
+    }
+  }
+
+  // Create ColorMode instance
+  var colorMode = new ColorMode(option)
+
+</script>
 ```
 
 ## Document
