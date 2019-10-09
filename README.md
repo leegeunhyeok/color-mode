@@ -80,6 +80,22 @@ npm install color-mode
 [DEMO](https://leegeunhyeok.github.io/color-mode/demo)
 
 ## Document
+
+Import ColorMode
+```javascript
+// NPM
+import colorMode from 'color-mode'
+```
+```html
+<!-- HTML Script -->
+<script src="color-mode.min.js">
+```
+
+Create ColorMode instance
+```javascript
+var colorMode = new ColorMode(option)
+```
+
 ### ColorMode
 ColorMode Class
 > ColorMode instance must be create once.
