@@ -75,6 +75,8 @@ npm install color-mode
 </script>
 ```
 
+<img src="./demo.gif">
+
 ## Document
 ### ColorMode
 ColorMode Class
