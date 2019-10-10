@@ -129,6 +129,11 @@
 
       ul {
         line-height: 150%;
+        margin: 15px;
+      }
+
+      li > ul {
+        margin: 0;
       }
 
       .tag {
@@ -187,7 +192,7 @@
       <div class="content">
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">ColorMode</h2>
+            <h2 id="colormode" class="primary-title" colormode="fg:labelPrimary">ColorMode</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">By Geunhyeok LEE</h5>
             <p colormode="fg:labelTertiary">Add color theme systme to your page with <span class="tag" colormode="tag">ColorMode!</span></p>
             <div class="button-wrap">
@@ -198,7 +203,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">Change theme</h2>
+            <h2 id="demo" class="primary-title" colormode="fg:labelPrimary">Change theme</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">ColorMode DEMO</h5>
             <div>
               <select id="theme_list" colormode="select">
@@ -209,7 +214,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">Install</h2>
+            <h2 id="install" class="primary-title" colormode="fg:labelPrimary">Install</h2>
             <h5 class="secondary-title"><!-- Empty --></h5>
             <div class="code" colormode="code">
               <div>
@@ -228,7 +233,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">Getting started</h2>
+            <h2 id="getting-started" class="primary-title" colormode="fg:labelPrimary">Getting started</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">Import and create instance</h5>
             <div class="code" colormode="code">
               <div>
@@ -285,8 +290,8 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">Usage</h2>
-            <h5 class="secondary-title">Basic usage</h5>
+            <h2 id="usage" class="primary-title" colormode="fg:labelPrimary">Usage</h2>
+            <h5 class="secondary-title" colormode="fg:labelTertiary">Basic usage</h5>
             <div class="code" colormode="code">
               <div>
                 <span colormode="fg:codeTag">&lt;</span>
@@ -780,9 +785,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#option">Option</a>
-            </h2>
+            <h2 id="option" class="primary-title" colormode="fg:labelPrimary">Option</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">ColorMode option</h5>
             <div class="table">
               <table class="table" colormode="table">
@@ -820,7 +823,7 @@
                   <tr>
                     <td class="left" colormode="tableItem">tags</td>
                     <td class="center" colormode="tableItem">
-                      <a href="#optiontags" colormode="fg:tint">object</a>
+                      <a href="#tags" colormode="fg:tint">object</a>
                     </td>
                     <td class="center" colormode="tableItem">O</td>
                     <td class="left" colormode="tableItem">none</td>
@@ -829,7 +832,7 @@
                   <tr>
                     <td class="left" colormode="tableItem">themes</td>
                     <td class="center" colormode="tableItem">
-                      <a href="#optionthemes" colormode="fg:tint">object</a>
+                      <a href="#themes" colormode="fg:tint">object</a>
                     </td>
                     <td class="center" colormode="tableItem">O</td>
                     <td class="left" colormode="tableItem">none</td>
@@ -842,9 +845,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#tags">Option.tags</a>
-            </h2>
+            <h2 id="tags" class="primary-title" colormode="fg:labelPrimary">Option.tags</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">option value</h5>
             <div class="table">
               <table colormode="table">
@@ -867,25 +868,7 @@
               </table>
             </div>
             <div>
-              <ul colormode="fg:labelTertiary">
-                <li>(string) CSS Property: 
-                  <span class="tag" colormode="tag">color</span>,
-                  <span class="tag" colormode="tag">background-color</span>,
-                  <span class="tag" colormode="tag">box-shadow</span>,
-                  <span class="tag" colormode="tag">...</span>
-                </li>
-                <li>(object) Style object:
-                  <span class="tag" colormode="tag">{ color: 'dodgerblue', backgroundColor: '#e0e0e0', ... }</span>
-                  <ul>
-                    <li>Property name must be CamelCase
-                      <span class="tag" colormode="tag">(background-color > backgroundColor)</span>
-                    </li>
-                    <li>You can using theme's color with @
-                      <span class="tag" colormode="tag">(ex: @NAME find 'NAME' color from theme)</span>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+              <br>
             </div>
             <div class="code" colormode="code">
               <div>
@@ -991,13 +974,32 @@
                 <span colormode="fg:codeSymbol">}</span>
               </div>
             </div>
+            <div>
+              <ul colormode="fg:labelTertiary">
+                <li>(string) CSS Property: 
+                  <span class="tag" colormode="tag">color</span>,
+                  <span class="tag" colormode="tag">background-color</span>,
+                  <span class="tag" colormode="tag">box-shadow</span>,
+                  <span class="tag" colormode="tag">...</span>
+                </li>
+                <li>(object) Style object:
+                  <span class="tag" colormode="tag">{ color: 'dodgerblue', backgroundColor: '#e0e0e0', ... }</span>
+                  <ul>
+                    <li>Property name must be CamelCase
+                      <span class="tag" colormode="tag">(background-color > backgroundColor)</span>
+                    </li>
+                    <li>You can using theme's color with @
+                      <span class="tag" colormode="tag">(ex: @NAME find 'NAME' color from theme)</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#themes">Option.themes</a>
-            </h2>
+            <h2 id="themes" class="primary-title" colormode="fg:labelPrimary">Option.themes</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">option value</h5>
             <div class="table">
               <table colormode="table">
@@ -1026,14 +1028,7 @@
               </table>
             </div>
             <div>
-              <ul colormode="fg:labelTertiary">
-                <li><span class="tag" colormode="tag">default</span> theme required</li>
-                <li>Define <span class="tag" colormode="tag">custom theme name</span> if you want to add theme
-                  <ul>
-                    <li>Each theme has style name(s)</li>
-                  </ul>
-                </li>
-              </ul>
+              <br>
             </div>
             <div class="code" colormode="code">
               <div>
@@ -1222,13 +1217,21 @@
                 <span colormode="fg:codeSymbol">}</span>
               </div>
             </div>
+            <div>
+              <ul colormode="fg:labelTertiary">
+                <li><span class="tag" colormode="tag">default</span> theme required</li>
+                <li>Define <span class="tag" colormode="tag">custom theme name</span> if you want to add theme
+                  <ul>
+                    <li>Each theme has style name(s)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#currenttheme">ColorMode.currentTheme</a>
-            </h2>
+            <h2 id="current-theme" class="primary-title" colormode="fg:labelPrimary">ColorMode.currentTheme</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">property</h5>
             <div class="table">
               <table colormode="table">
@@ -1275,9 +1278,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#getthemelist">ColorMode.getThemeList</a>
-            </h2>
+            <h2 id="get-theme-list" class="primary-title" colormode="fg:labelPrimary">ColorMode.getThemeList</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">method</h5>
             <p colormode="fg:labelTertiary">Return all of theme names list</p>
             <div class="code" colormode="code">
@@ -1346,9 +1347,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#set">ColorMode.set</a>
-            </h2>
+            <h2 id="set" class="primary-title" colormode="fg:labelPrimary">ColorMode.set</h2>
             <h5 class="secondary-title" colormode="fg:labelTertiary">method</h5>
             <p colormode="fg:labelTertiary">Change theme to target theme</p>
             <div class="code" colormode="code">
@@ -1368,9 +1367,7 @@
         </div>
         <div class="item">
           <div class="panel" colormode="bg:bgSecondary">
-            <h2 class="primary-title" colormode="fg:labelPrimary">
-              <a href="#license">License</a>
-            </h2>
+            <h2 id="license" class="primary-title" colormode="fg:labelPrimary">License</h2>
             <div colormode="fg:labelTertiary">MIT</div>
           </div>
         </div>
